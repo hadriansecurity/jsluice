@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/BishopFox/jsluice"
+	"github.com/hadriansecurity/jsluice"
 )
 
 func extractSecrets(opts options, filename string, source []byte, output chan string, errs chan error) {

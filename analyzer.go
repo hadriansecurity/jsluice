@@ -16,6 +16,7 @@ type Analyzer struct {
 	urlMatchers        []URLMatcher
 	rootNode           *Node
 	userSecretMatchers []SecretMatcher
+	tree               *sitter.Tree // retained so its cgo memory can be freed via Close
 }
 
 // NewAnalyzer accepts a slice of bytes representing some JavaScript
@@ -39,6 +40,17 @@ func NewAnalyzer(source []byte) *Analyzer {
 	return &Analyzer{
 		urlMatchers: AllURLMatchers(),
 		rootNode:    NewNode(tree.RootNode(), source),
+		tree:        tree,
+	}
+}
+
+// Close frees the underlying tree-sitter parse tree (cgo memory) immediately
+// instead of waiting for the GC finalizer. Safe to call multiple times; the
+// Analyzer must not be used (RootNode/Query/GetURLs/GetSecrets) after Close.
+func (a *Analyzer) Close() {
+	if a.tree != nil {
+		a.tree.Close()
+		a.tree = nil
 	}
 }
 

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/BishopFox/jsluice"
+	"github.com/hadriansecurity/jsluice"
 )
 
 func format(opts options, filename string, source []byte, output chan string, errs chan error) {

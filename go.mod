@@ -1,4 +1,4 @@
-module github.com/BishopFox/jsluice
+module github.com/hadriansecurity/jsluice
 
 go 1.18
 

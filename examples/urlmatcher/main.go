@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/BishopFox/jsluice"
+	"github.com/hadriansecurity/jsluice"
 )
 
 func main() {
